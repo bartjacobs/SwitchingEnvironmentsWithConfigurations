@@ -10,31 +10,31 @@ import UIKit
 
 struct Configuration {
     lazy var environment: Environment = {
-        if let configuration = NSBundle.mainBundle().objectForInfoDictionaryKey("Configuration") as? String {
-            if configuration.rangeOfString("Staging") != nil {
-                return Environment.Staging
+        if let configuration = Bundle.main.object(forInfoDictionaryKey: "Configuration") as? String {
+            if configuration.range(of: "Staging") != nil {
+                return .staging
             }
         }
 
-        return Environment.Production
+        return .production
     }()
 }
 
 enum Environment: String {
-    case Staging = "staging"
-    case Production = "production"
+    case staging
+    case production
 
     var baseURL: String {
         switch self {
-        case .Staging: return "https://staging-api.myservice.com"
-        case .Production: return "https://api.myservice.com"
+        case .staging: return "https://staging-api.myservice.com"
+        case .production: return "https://api.myservice.com"
         }
     }
 
     var token: String {
         switch self {
-        case .Staging: return "lktopir156dsq16sbi8"
-        case .Production: return "5zdsegr16ipsbi1lktp"
+        case .staging: return "lktopir156dsq16sbi8"
+        case .production: return "5zdsegr16ipsbi1lktp"
         }
     }
 }
